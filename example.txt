@@ -1,0 +1,155 @@
+(base) saugardev@RHINOMAC email-parts % node index.mjs 
+{
+  id: 'msg_01XVvcMhSAy1PTVfhuFb9q2d',
+  type: 'message',
+  role: 'assistant',
+  model: 'claude-3-5-sonnet-20241022',
+  content: [
+    {
+      type: 'text',
+      text: "Based on the extraction goals to get the name and title of the talk from the email, I'll create a JSON structure with regex patterns to extract this information:\n" +
+        '\n' +
+        '```json\n' +
+        '{\n' +
+        '  "values": [\n' +
+        '    {\n' +
+        '      "name": "speaker_name",\n' +
+        '      "parts": [\n' +
+        '        {\n' +
+        '          "is_public": false,\n' +
+        '          "regex_def": "Hi "\n' +
+        '        },\n' +
+        '        {\n' +
+        '          "is_public": true,\n' +
+        '          "regex_def": "[^,]+"\n' +
+        '        },\n' +
+        '        {\n' +
+        '          "is_public": false,\n' +
+        '          "regex_def": ","\n' +
+        '        }\n' +
+        '      ],\n' +
+        '      "location": "body",\n' +
+        '      "maxLength": 100\n' +
+        '    },\n' +
+        '    {\n' +
+        '      "name": "talk_title",\n' +
+        '      "parts": [\n' +
+        '        {\n' +
+        '          "is_public": false,\n' +
+        '          "regex_def": "your proposal \\""\n' +
+        '        },\n' +
+        '        {\n' +
+        '          "is_public": true,\n' +
+        '          "regex_def": "[^\\"]*"\n' +
+        '        },\n' +
+        '        {\n' +
+        '          "is_public": false,\n' +
+        '          "regex_def": "\\""\n' +
+        '        }\n' +
+        '      ],\n' +
+        '      "location": "body", \n' +
+        '      "maxLength": 200\n' +
+        '    }\n' +
+        '  ]\n' +
+        '}\n' +
+        '```\n' +
+        '\n' +
+        'This structure will:\n' +
+        '\n' +
+        "1. Extract the speaker's name:\n" +
+        '- Matches after "Hi " and before the comma\n' +
+        '- Captures the full name as public content\n' +
+        '- Maximum length of 100 characters to accommodate long names\n' +
+        '\n' +
+        '2. Extract the talk title:\n' +
+        '- Matches between the quotes after "your proposal"\n' +
+        '- Captures the entire title as public content\n' +
+        '- Maximum length of 200 characters to accommodate long titles\n' +
+        '\n' +
+        'The patterns are:\n' +
+        '- Continuous in the email content\n' +
+        '- Specific enough to avoid false matches\n' +
+        '- Split appropriately between public/private parts\n' +
+        '- Located in the email body\n' +
+        '- Include clear boundaries (comma, quotes)\n' +
+        '\n' +
+        'The regex patterns will extract:\n' +
+        '- Name: "Aayush Gupta"\n' +
+        '- Title: "The Signature Singularity: How Signed Data Standards Unlock Web Portability and Pseudonymity"'
+    }
+  ],
+  stop_reason: 'end_turn',
+  stop_sequence: null,
+  usage: { input_tokens: 30327, output_tokens: 486 }
+}
+--------------------------------
+Based on the extraction goals to get the name and title of the talk from the email, I'll create a JSON structure with regex patterns to extract this information:
+
+```json
+{
+  "values": [
+    {
+      "name": "speaker_name",
+      "parts": [
+        {
+          "is_public": false,
+          "regex_def": "Hi "
+        },
+        {
+          "is_public": true,
+          "regex_def": "[^,]+"
+        },
+        {
+          "is_public": false,
+          "regex_def": ","
+        }
+      ],
+      "location": "body",
+      "maxLength": 100
+    },
+    {
+      "name": "talk_title",
+      "parts": [
+        {
+          "is_public": false,
+          "regex_def": "your proposal \""
+        },
+        {
+          "is_public": true,
+          "regex_def": "[^\"]*"
+        },
+        {
+          "is_public": false,
+          "regex_def": "\""
+        }
+      ],
+      "location": "body", 
+      "maxLength": 200
+    }
+  ]
+}
+```
+
+This structure will:
+
+1. Extract the speaker's name:
+- Matches after "Hi " and before the comma
+- Captures the full name as public content
+- Maximum length of 100 characters to accommodate long names
+
+2. Extract the talk title:
+- Matches between the quotes after "your proposal"
+- Captures the entire title as public content
+- Maximum length of 200 characters to accommodate long titles
+
+The patterns are:
+- Continuous in the email content
+- Specific enough to avoid false matches
+- Split appropriately between public/private parts
+- Located in the email body
+- Include clear boundaries (comma, quotes)
+
+The regex patterns will extract:
+- Name: "Aayush Gupta"
+- Title: "The Signature Singularity: How Signed Data Standards Unlock Web Portability and Pseudonymity"
+(base) saugardev@RHINOMAC email-parts % 
